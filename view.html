@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="UTF-8">
+	<title>RAD App</title>
+	<!-- Twitter Bootstrap is a styling-framework which provides us with some nice-looking css-styles out of the box -->
+	<link href="bower_components/bootstrap/dist/css/bootstrap.css" reL="stylesheet"/>
+</head>
+<!-- ng-app tells angularJS where our app is gonna start -->
+<body ng-app="radChat">
+<!-- The ng-controller tells angular, which controller is responsible for all the child-elements under this div -->
+<div class="main" ng-controller="chatController">
+	<div class="container">
+		<h1>Welcome to RADChat!</h1>
+
+		<!-- MESSAGES - WINDOW: This is where all the written messages will appear -->
+		<div class="row">
+			<!-- We use Bootstraps "panel"-Styles to create a nice square for our messages-->
+			<div class="panel panel-default">
+				<div class="panel-heading">Nachrichten</div>
+				<!-- Since the panel doesnt know a height, we force it here (usually this would be done within a css-file) -->
+				<div class="panel-body" style="height: 300px; overflow: auto;">
+						<!-- ng-repeat lets angular multiply the following <span> as often as there is elements in the
+						"allMessages"-Array. "allMessages" can be found in the client.js and will be filled with messages
+						from the server -->
+						<span ng-repeat="message in allMessages">
+							<strong>{{message.userName}}:</strong> {{message.content}}<br/>
+						</span>
+				</div>
+			</div>
+		</div>
+		<!-- INPUT WINDOW: This is where the user types its name and message-->
+		<div class="row">
+			<!-- We use a standard html-form. ng-submit tells angular to call the "postMessage()" inside the
+			client.js whenever the user submits this form either by hitting "enter" or clicking our button -->
+			<form class="form-inline" role="form" ng-submit="postMessage()">
+				<div class="form-group">
+					<input type="text" ng-model="userName" class="form-control" placeholder="Enter Name">
+				</div>
+				<div class="form-group">
+					<input type="text" ng-model="message" class="form-control" placeholder="Enter Message">
+				</div>
+				<button type="submit" class="btn btn-warning">Senden</button>
+			</form>
+		</div>
+	</div>
+</div>
+</body>
+<!-- We need to connect all the javascript with our html. first of all angularJS, then our client.js which uses angular -->
+<script src="bower_components/angular/angular.min.js"></script>
+<script src="client.js"></script>
+</html>
