@@ -7,7 +7,7 @@
   ],
   "description": "A rapid developed Chat-App",
   "main": "client.js",
-  "license": "MIT",
+  "license": "NONE",
   "private": true,
   "ignore": [
     "**/.*",
